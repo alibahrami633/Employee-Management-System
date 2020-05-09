@@ -32,6 +32,7 @@ const department = {
                     function (err) {
                         if (err) throw err;
                         console.log("\nDepartment was created successfully!\n");
+                        return;
                     }
                 );
             });

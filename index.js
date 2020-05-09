@@ -7,12 +7,10 @@ const roleObj = require("./util/role");
 require("console.table");
 let clear = require("clear");
 
-
-console.log("clearing is done....");
+clear();
 init();
 
 function init() {
-    clear();
     inquirer
         .prompt({
             name: "menu",
