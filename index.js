@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const cTable = require("console.table");
 
-let connection = require("./util/connection.js");
+
 
 init();
 
