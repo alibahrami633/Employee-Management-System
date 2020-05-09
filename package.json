@@ -1,0 +1,19 @@
+{
+    "name": "employeemanagementsystem",
+    "version": "1.0.1",
+    "description": "Managing the employees",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js",
+        "watch": "nodemon index.js"
+    },
+    "author": "Ali Bahrami",
+    "license": "",
+    "dependencies": {
+        "console.table": "^0.10.0",
+        "clear": "^0.1.0",
+        "inquirer": "^7.1.0",
+        "mysql": "^2.18.1"
+    }
+}

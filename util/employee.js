@@ -1,4 +1,4 @@
-let connection = require("./util/connection.js");
+let connection = require("./connection");
 const inquirer = require("inquirer");
 
 const selectEmployeeQuery = "SELECT * FROM employee";
