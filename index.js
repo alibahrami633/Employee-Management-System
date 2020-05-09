@@ -1,6 +1,10 @@
 const inquirer = require("inquirer");
 const cTable = require("console.table");
 
+const employeeObj = require("./util/employee");
+const departmentObj = require("./util/department");
+const roleObj = require("./util/role");
+
 
 
 init();
@@ -32,64 +36,50 @@ function init() {
         .then(function (answer) {
             switch (answer.menu) {
                 case "View All Employees":
-                    viewEmployees();
+                    employeeObj.viewEmployees();
                     break;
 
                 case "View All Departments":
-                    viewDepartments();
+                    departmentObj.viewDepartments();
                     break;
 
                 case "View All Roles":
-                    viewRoles();
+                    roleObj.viewRoles();
                     break;
 
                 case "Add Department":
-                    addDepartment();
+                    departmentObj.addDepartment();
                     break;
 
                 case "Add Role":
-                    addRole();
+                    roleObj.addRole();
                     break;
 
                 case "Add Employee":
-                    addEmployee();
+                    employeeObj.addEmployee();
                     break;
 
                 case "Update Employee Role":
-                    updateEmployeeRole();
+                    employeeObj.updateEmployeeRole();
                     break;
 
                 case "Remove Employee":
-                    removeEmployee();
-                    break;
-
-                case "Update Employee Manager":
-                    updateEmployeeManager();
-                    break;
-
-                case "View All Employees by Department":
-                    viewEmployeesByDepartment();
-                    break;
-
-                case "View All Employees by Manager":
-                    viewEmployeesByManager();
-                    break;
-
-                case "View Total Utilized Budget of a Department":
-                    viewTotalUtilizedBudget();
+                    employeeObj.removeEmployee();
                     break;
 
                 case "Remove Role":
-                    removeRole();
+                    roleObj.removeRole();
                     break;
 
                 case "Remove Department":
-                    removeDepartment();
+                    departmentObj.removeDepartment();
                     break;
 
                 case "Exit":
-                    connection.end();
-                    process.exit(0);
+                    if (connection) {
+                        connection.end();
+                        process.exit(0);
+                    }
                     break;
             }
         });

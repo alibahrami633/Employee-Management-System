@@ -1,4 +1,7 @@
 let connection = require("./util/connection.js");
+const inquirer = require("inquirer");
+
+const selectRolesQuery = "SELECT * FROM role";
 
 const role = {
 
@@ -50,6 +53,47 @@ const role = {
                         (err) => {
                             if (err) throw err;
                             console.log("\nThe new role was created successfully.\n");
+                        }
+                    );
+                });
+        });
+    },
+
+    removeRole() {
+        connection.query(selectRolesQuery, function (err, role) {
+            if (err) throw err;
+            inquirer
+                .prompt([
+                    {
+                        name: "getRole",
+                        type: "rawlist",
+                        choices: () => {
+                            var roleList = [];
+                            role.forEach((role) => roleList.push(role.role_title));
+                            return roleList;
+                        },
+                        message: "Select a role to remove:",
+                    },
+                ])
+                .then((response) => {
+                    let roleId;
+                    role.forEach(
+                        (role) => (role.role_title === response.getRole) ? (roleId = role.id) : null
+                    );
+                    connection.query(
+                        "Delete from role WHERE ?",
+                        [
+                            {
+                                id: roleId,
+                            },
+                        ],
+                        function (err) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                console.log("\nThe selected role was removed.\n");
+                            }
                         }
                     );
                 });

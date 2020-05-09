@@ -1,4 +1,6 @@
 let connection = require("./util/connection.js");
+const inquirer = require("inquirer");
+const selectDeparmentsQuery = "SELECT * FROM department";
 
 const department = {
 
@@ -33,6 +35,47 @@ const department = {
                     }
                 );
             });
+    },
+
+    removeDepartment() {
+        connection.query(selectDeparmentsQuery, (err, dep) => {
+            if (err) throw err;
+            inquirer
+                .prompt([
+                    {
+                        name: "getDepartment",
+                        type: "rawlist",
+                        choices: () => {
+                            let departmentList = [];
+                            dep.forEach((department) => departmentList.push(department.name));
+                            return departmentList;
+                        },
+                        message: "Select the department to remove:",
+                    },
+                ])
+                .then((response) => {
+                    let departmentId;
+                    dep.forEach(
+                        (department) => (department.name === response.getDepartment) ? (departmentId = department.id) : null
+                    );
+                    connection.query(
+                        "Delete from department WHERE ?",
+                        [
+                            {
+                                id: departmentId,
+                            },
+                        ],
+                        (err) => {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                console.log("\nThe department was removed.\n");
+                            }
+                        }
+                    );
+                });
+        });
     }
 
 };
