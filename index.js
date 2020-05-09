@@ -3,18 +3,20 @@ const inquirer = require("inquirer");
 const employeeObj = require("./util/employee");
 const departmentObj = require("./util/department");
 const roleObj = require("./util/role");
-const clear = require("clear");
 
 require("console.table");
+let clear = require("clear");
 
-// clear();
+
+console.log("clearing is done....");
 init();
 
 function init() {
+    clear();
     inquirer
         .prompt({
             name: "menu",
-            type: "rawlist",
+            type: "list",
             message: "\n\nYour options:\n\n",
             choices: [
                 "View All Employees",
@@ -30,7 +32,7 @@ function init() {
                 "Exit",
             ],
         })
-        .then(function (answer) {
+        .then((answer) => {
             switch (answer.menu) {
                 case "View All Employees":
                     employeeObj.viewEmployees();
